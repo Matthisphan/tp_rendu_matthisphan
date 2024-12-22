@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+    {% include 'language/index.html.twig' with {'languages': languages} %}
+{% endblock %}

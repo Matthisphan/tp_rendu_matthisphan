@@ -16,6 +16,13 @@ class LanguageRepository extends ServiceEntityRepository
         parent::__construct($registry, Language::class);
     }
 
+    public function findAllLanguages()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Language[] Returns an array of Language objects
 //     */

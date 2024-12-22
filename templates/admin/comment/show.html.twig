@@ -7,14 +7,22 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ comment.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ comment.content }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ comment.id }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ comment.content }}</td>
+        </tr>
+        <tr>
+            <th>Article</th>
+            <td><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ user.email }}</td>
+        </tr>
         </tbody>
     </table>
 

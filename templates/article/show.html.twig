@@ -1,0 +1,26 @@
+{# templates/article/show.html.twig #}
+{% include 'parts/header.html.twig' %}
+{% include 'parts/leftMenu.html.twig' with {'categories': categories} %}
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>  {# Afficher le contenu de l'article #}
+
+    <h2>Commentaires</h2>
+    <ul>
+        {% for comment in comments %}
+            <div>
+                <p><strong>Auteur:</strong> {{ comment.user.email }}</p> <!-- Affiche l'email de l'utilisateur -->
+                <p>{{ comment.content }}</p>
+            </div>
+        {% else %}
+            <p>Aucun commentaire n'a été posté pour cet article.</p> <!-- Message si aucun commentaire -->
+        {% endfor %}
+    </ul>
+
+    <h3>Ajouter un commentaire</h3>
+    {{ form_start(form) }}
+    {{ form_row(form.content) }}
+    <button type="submit">Envoyer</button> {# Personnalise le bouton de soumission ici #}
+    {{ form_end(form) }}
+{% endblock %}

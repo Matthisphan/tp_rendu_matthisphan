@@ -25,7 +25,10 @@ final class CommentController extends AbstractController{
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
+        // Créer le formulaire de commentaire
+        $form = $this->createForm(CommentType::class, $comment, [
+            'show_article_user' => true,  // Masquer les champs 'article' et 'user'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,15 +47,25 @@ final class CommentController extends AbstractController{
     #[Route('/{id}', name: 'app_admin_comment_show', methods: ['GET'])]
     public function show(Comment $comment): Response
     {
+        // Récupérer l'article lié au commentaire
+        $article = $comment->getArticle();
+
+        // Récupérer l'utilisateur lié au commentaire
+        $user = $comment->getUser();
+
         return $this->render('admin/comment/show.html.twig', [
             'comment' => $comment,
+            'article' => $article,
+            'user' => $user,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_admin_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(CommentType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment, [
+            'show_article_user' => true,  // Masquer les champs 'article' et 'user'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

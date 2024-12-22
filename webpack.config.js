@@ -3,16 +3,16 @@ const Encore = require('@symfony/webpack-encore');
 Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
-    .addEntry('app', './assets/app.js')  // Assurez-vous que le fichier app.js est bien présent
-    .enablePostCssLoader((options) => {
-        options.postcssOptions = {
-            config: './postcss.config.js'
-        };
-    })
-    .splitEntryChunks()
+
+    // Entrée de l'application
+    .addEntry('app', './assets/js/app.js')  // Assure-toi que ce fichier existe
+
+    .enableSassLoader()
+    .enablePostCssLoader()
+
     .enableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction());
+
+    .enableVersioning()
+;
 
 module.exports = Encore.getWebpackConfig();

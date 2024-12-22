@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+    {% include 'category/index.html.twig' with {'categories': categories} %}
+{% endblock %}
