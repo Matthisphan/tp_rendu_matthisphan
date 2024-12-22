@@ -40,6 +40,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/banned, roles: ROLE_BANNED }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY, allow_if: "not is_granted('ROLE_BANNED')" }
 
 
     role_hierarchy:
