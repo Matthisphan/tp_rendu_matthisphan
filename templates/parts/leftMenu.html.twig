@@ -35,6 +35,12 @@
         {% endfor %}
     </ul>
 
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin') }}" class="menu-item admin">
+            <span>Admin Panel</span>
+        </a>
+    {% endif %}
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a href="{{ path('app_logout') }}" class="menu-item logout">
             <span>Déconnexion</span>

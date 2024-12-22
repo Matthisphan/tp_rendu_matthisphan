@@ -3,9 +3,32 @@
 {% block title %}New Comment{% endblock %}
 
 {% block body %}
-    <h1>Create new Comment</h1>
+<div class="containerPosition">
+    <div class="containerLeftMenu">
+        {% include 'parts/leftMenu.html.twig' %}
+    </div>
 
-    {{ include('admin/comment/_form.html.twig') }}
+    <div class="containerMainArticleShow">
+        <div class="form-container">
+            <h1 class="form-title">Create New Comment</h1>
 
-    <a href="{{ path('app_admin_comment_index') }}">back to list</a>
+            <form action="{{ path('app_admin_comment_new') }}" method="POST" class="form">
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    {{ form_label(form.content) }}
+                    {{ form_widget(form.content, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.content) }}
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ path('app_admin_comment_index') }}" class="btn btn-secondary">Back to List</a>
+                </div>
+
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

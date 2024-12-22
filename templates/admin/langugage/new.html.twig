@@ -3,9 +3,38 @@
 {% block title %}New Language{% endblock %}
 
 {% block body %}
-    <h1>Create new Language</h1>
+<div class="containerPosition">
+    <div class="containerLeftMenu">
+        {% include 'parts/leftMenu.html.twig' %}
+    </div>
 
-    {{ include('admin/langugage/_form.html.twig') }}
+    <div class="containerMainArticleShow">
+        <div class="form-container">
+            <h1 class="form-title">Create New Language</h1>
 
-    <a href="{{ path('app_admin_langugage_index') }}">back to list</a>
+            <form action="{{ path('app_admin_langugage_new') }}" method="POST" class="form">
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.code) }}
+                    {{ form_widget(form.code, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.code) }}
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ path('app_admin_langugage_index') }}" class="btn btn-secondary">Back to List</a>
+                </div>
+
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

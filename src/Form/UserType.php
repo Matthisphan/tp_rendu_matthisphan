@@ -27,6 +27,7 @@ class UserType extends AbstractType
             ])
             ->add('plainPassword', TextType::class, [
                 'mapped' => false,
+                'required' => false,
             ])
             ->add('isVerified', CheckboxType::class, [
                 'required' => false,

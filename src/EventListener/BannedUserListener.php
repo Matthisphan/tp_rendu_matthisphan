@@ -1,11 +1,10 @@
 <?php
-
 namespace App\EventListener;
 
-use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class BannedUserListener
 {
@@ -22,10 +21,12 @@ class BannedUserListener
     {
         $user = $this->security->getUser();
 
-        // Vérifie si l'utilisateur est connecté et possède le rôle "ROLE_BANNED"
-        if ($user && in_array('ROLE_BANNED', $user->getRoles(), true)) {
-            // Redirige vers une page spécifique
-            $event->setResponse(new RedirectResponse($this->router->generate('banned_user')));
+        if ($user) {
+            // Vérifiez si l'utilisateur a le rôle ROLE_BANNED
+            if (in_array('ROLE_BANNED', $user->getRoles(), true)) {
+                // Redirection vers la page de bannissement
+                $event->setResponse(new RedirectResponse($this->router->generate('banned_user')));
+            }
         }
     }
 }

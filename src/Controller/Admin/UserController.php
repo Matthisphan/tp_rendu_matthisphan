@@ -65,14 +65,19 @@ final class UserController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifiez si un nouveau mot de passe a été entré
             $plainPassword = $form->get('plainPassword')->getData();
 
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $plainPassword
-            );
+            if ($plainPassword) {
+                // Si le mot de passe est renseigné, hachez-le et mettez-le à jour
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $plainPassword
+                );
+                $user->setPassword($hashedPassword);
+            }
 
-            $user->setPassword($hashedPassword);
+            // Si le mot de passe n'est pas modifié, ne touchez pas à l'ancien mot de passe
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);

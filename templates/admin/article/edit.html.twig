@@ -3,11 +3,72 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
-    <h1>Edit Article</h1>
+<div class="containerPosition">
+    <div class="containerLeftMenu">
+        {% include 'parts/leftMenu.html.twig' %}
+    </div>
 
-    {{ include('admin/article/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="containerMainArticleShow">
+        <div class="form-container">
+            <h1 class="form-title">Edit Article</h1>
 
-    <a href="{{ path('app_admin_article_index') }}">back to list</a>
+            <form action="{{ path('app_admin_article_edit', {'id': article.id}) }}" method="POST" class="form">
+                {{ form_start(form) }}
 
-    {{ include('admin/article/_delete_form.html.twig') }}
+                <div class="form-group">
+                    {{ form_label(form.title, 'Title') }}
+                    {{ form_widget(form.title, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.content, 'Content') }}
+                    {{ form_widget(form.content, { 'attr': { 'class': 'form-textarea' } }) }}
+                    {{ form_errors(form.content) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.createdAt, 'Created At') }}
+                    {{ form_widget(form.createdAt, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.createdAt) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.updatedAt, 'Updated At') }}
+                    {{ form_widget(form.updatedAt, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.updatedAt) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user, 'User') }}
+                    {{ form_widget(form.user, { 'attr': { 'class': 'form-select' } }) }}
+                    {{ form_errors(form.user) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.category, 'Category') }}
+                    {{ form_widget(form.category, { 'attr': { 'class': 'form-select' } }) }}
+                    {{ form_errors(form.category) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.language, 'Language') }}
+                    {{ form_widget(form.language, { 'attr': { 'class': 'form-select' } }) }}
+                    {{ form_errors(form.language) }}
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                    <a href="{{ path('app_admin_article_index') }}" class="btn btn-secondary">Back to List</a>
+                </div>
+
+                {{ form_end(form) }}
+            </form>
+
+            <div class="delete-form">
+                {{ include('admin/article/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

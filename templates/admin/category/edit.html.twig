@@ -3,11 +3,36 @@
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
-    <h1>Edit Category</h1>
+<div class="containerPosition">
+    <div class="containerLeftMenu">
+        {% include 'parts/leftMenu.html.twig' %}
+    </div>
 
-    {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="containerMainArticleShow">
+        <div class="form-container">
+            <h1 class="form-title">Edit Category</h1>
 
-    <a href="{{ path('app_admin_category_index') }}">back to list</a>
+            <form action="{{ path('app_admin_category_edit', {'id': category.id}) }}" method="POST" class="form">
+                {{ form_start(form) }}
 
-    {{ include('admin/category/_delete_form.html.twig') }}
+                <div class="form-group">
+                    {{ form_label(form.name, 'Name') }}
+                    {{ form_widget(form.name, { 'attr': { 'class': 'form-input' } }) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">{{ button_label|default('Update') }}</button>
+                    <a href="{{ path('app_admin_category_index') }}" class="btn btn-secondary">Back to List</a>
+                </div>
+
+                {{ form_end(form) }}
+            </form>
+
+            <div class="delete-form">
+                {{ include('admin/category/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

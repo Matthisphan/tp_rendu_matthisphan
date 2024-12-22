@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LifeHacksBlog - Home{% endblock %}
+
+{% block body %}
+    <div class="containerPosition">
+        <div class="containerLeftMenu">
+            {% include 'parts/leftMenu.html.twig' %}
+        </div>
+
+        <div class="containerMainAdminPanel">
+            <h1>Admin Panel</h1>
+            <div class="containerAdminPanel">
+                <a href="{{ path('app_admin_article_index') }}">
+                    <h2 class="">Gestion des articles</h2>
+                </a>
+
+                <a href="{{ path('app_admin_category_index') }}">
+                    <h2 class="">Gestion des categories</h2>
+                </a>
+
+                <a href="{{ path('app_admin_langugage_index') }}">
+                    <h2 class="">Gestion des langues</h2>
+                </a>
+
+                <a href="{{ path('app_admin_user_index') }}">
+                    <h2 class="">Gestion des utilisateurs</h2>
+                </a>
+
+                <a href="{{ path('app_admin_comment_index') }}">
+                    <h2 class="">Gestion des commentaires</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% include 'parts/footer.html.twig' %}
+{% endblock %}
