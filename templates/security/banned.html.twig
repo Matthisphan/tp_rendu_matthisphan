@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès Restreint{% endblock %}
+
+{% block body %}
+    <div style="text-align: center; margin-top: 50px;">
+        <h1 style="color: #ff0000; font-size: 3rem;">🚫 Accès Restreint</h1>
+        <p style="font-size: 1.5rem; margin-top: 20px;">
+            {{ message }}
+        </p>
+        <p style="margin-top: 30px;">
+            Si vous pensez qu'il s'agit d'une erreur, veuillez contacter l'administrateur à l'adresse e-mail<a href="#" style="color: #007bff; text-decoration: none;">jmesuisfaitbanne@cheh.com</a>.
+        </p>
+        <a href="{{ path('app_logout') }}" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none;">
+            Se déconnecter
+        </a>
+    </div>
+{% endblock %}

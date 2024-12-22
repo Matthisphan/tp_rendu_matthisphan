@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home_index')]
+    #[Route('/', name: 'app_home')]
     public function index(CategoryRepository $categoryRepository, LanguageRepository $languageRepository): Response
     {
         // Récupérer toutes les catégories
