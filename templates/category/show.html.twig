@@ -1,14 +1,32 @@
-{% include 'parts/header.html.twig' %}
-{% include 'parts/leftMenu.html.twig' with {'categories': categories} %}
+{% extends 'base.html.twig' %}
+
+{% block title %}LifeHacksBlog - Categories{% endblock %}
 
 {% block body %}
-    <h1>Articles dans la catégorie {{ category.name }}</h1>
+    <div class="containerPosition">
+        <div class="containerLeftMenu">
+            {% include 'parts/leftMenu.html.twig' %}
+        </div>
 
-    <ul>
-        {% for article in articles %}
-                <a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a>  {# Assure-toi que "title" est la propriété de ton article #}
-        {% else %}
-            <li>Aucun article dans cette catégorie.</li>
-        {% endfor %}
-    </ul>
+        <div class="containerArticle">
+            <h1>Articles dans la catégorie "{{ category.name }}"</h1>
+            <ul>
+                {% for article in articles %}
+                    <a href="{{ path('article_show', { id: article.id }) }}">
+                        <li>
+                            <h3>
+                                {{ article.title }}
+                            </h3>
+                            <p>{{ article.content|slice(0, 150) ~ '...' }}</p>
+                            <small>Dernière mise à jour : {{ article.updatedAt|date('d/m/Y H:i') }}</small>
+                        </li>
+                    </a>
+                {% else %}
+                    <p>Aucun article disponible.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% include 'parts/footer.html.twig' %}
 {% endblock %}

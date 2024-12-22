@@ -34,12 +34,14 @@ class CommentType extends AbstractType
                 ->add('article', EntityType::class, [
                     'class' => Article::class,
                     'choice_label' => 'title',
+                    'label' => false,
                     'mapped' => false,  // Ne pas mapper ce champ à l'entité
                     'attr' => ['style' => 'display:none;']  // Masquer le champ via du CSS
                 ])
                 ->add('user', EntityType::class, [
                     'class' => User::class,
                     'choice_label' => 'email',
+                    'label' => false,
                     'mapped' => false,  // Ne pas mapper ce champ à l'entité
                     'attr' => ['style' => 'display:none;']  // Masquer le champ via du CSS
                 ]);

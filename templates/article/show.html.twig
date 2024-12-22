@@ -1,30 +1,47 @@
+{% extends 'base.html.twig' %}
 
-{% include 'parts/header.html.twig' %}
-{% include 'parts/leftMenu.html.twig' with {'categories': categories} %}
 
 {% block body %}
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content }}</p>
+    <div class="containerPosition">
+        <div class="containerLeftMenu">
+            {% include 'parts/leftMenu.html.twig' %}
+        </div>
 
-    <h2>Commentaires</h2>
-    <ul>
-        {% for comment in comments %}
-            <div>
-                <p><strong>Auteur:</strong> {{ comment.user.email }}</p>
-                <p>{{ comment.content }}</p>
+        <div class="containerMainArticleShow">
+            <div class="containerArticleShow">
+                <h1>{{ article.title }}</h1>
+                <p>{{ article.content }}</p>
             </div>
-        {% else %}
-            <p>Aucun commentaire n'a été posté pour cet article.</p>
-        {% endfor %}
-    </ul>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <h3>Ajouter un commentaire</h3>
-        {{ form_start(form) }}
-        {{ form_row(form.content) }}
-        <button type="submit">Envoyer</button>
-        {{ form_end(form) }}
-    {% else %}
-        <h3>Connectez-vous pour ajouter un commentaire</h3>
-    {% endif %}
+            <div class="containerComments">
+                <h2>Commentaires</h2>
+
+                <ul>
+                    {% for comment in comments %}
+                        <div class="containerOneComment">
+                            <p><strong>Auteur:</strong> {{ comment.user.email }}</p>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    {% else %}
+                        <p>Aucun commentaire n'a été posté pour cet article.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="containerAddComment">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <h2>Ajouter un commentaire</h2>
+                    {{ form_start(form, { 'attr': { 'class': 'commentForm' } }) }}
+                    <div class="formField">
+                        {{ form_widget(form.content, { 'attr': { 'class': 'form-control' } }) }}
+                    </div>
+                    <button type="submit" class="submitBtn">Envoyer</button>
+                    {{ form_end(form) }}
+                {% else %}
+                    <h3>Connectez-vous pour ajouter un commentaire</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% include 'parts/footer.html.twig' %}
 {% endblock %}

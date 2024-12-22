@@ -1,12 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue{% endblock %}
+{% block title %}LifeHacksBlog - Home{% endblock %}
 
 {% block body %}
-    {% include 'parts/header.html.twig' %}
-    {% include 'parts/leftMenu.html.twig' %}
-    <h1>Bienvenue sur le Blog</h1>
+    <div class="containerPosition">
+        <div class="containerLeftMenu">
+            {% include 'parts/leftMenu.html.twig' %}
+        </div>
 
-    <h2>Liste des Catégories</h2>
+        <div class="containerArticle">
+            <h2>Articles récents</h2>
+            <ul>
+                {% for article in articles %}
+                    <a href="{{ path('article_show', { id: article.id }) }}">
+                        <li>
+                            <h3>
+                               {{ article.title }}
+                            </h3>
+                            <p>{{ article.content|slice(0, 150) ~ '...' }}</p>
+                            <small>Dernière mise à jour : {{ article.updatedAt|date('d/m/Y H:i') }}</small>
+                        </li>
+                    </a>
+                {% else %}
+                    <p>Aucun article disponible.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
     {% include 'parts/footer.html.twig' %}
 {% endblock %}
